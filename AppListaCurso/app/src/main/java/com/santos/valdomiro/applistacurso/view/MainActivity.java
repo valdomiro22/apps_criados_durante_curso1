@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.santos.valdomiro.applistacurso.R;
+import com.santos.valdomiro.applistacurso.controller.PessoaController;
 import com.santos.valdomiro.applistacurso.model.Pessoa;
 
 import java.util.Objects;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     AppCompatButton btnFinalizar;
 
     Pessoa pessoa;
+    PessoaController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         iniciarComponentes();
 
         pessoa = new Pessoa();
+        controller = new PessoaController();
+
         pessoa.setPrimeiroNome("Valdomiro");
         pessoa.setSobrenome("Santos");
         pessoa.setCursoDesejado("Desenvolvimento Android");
@@ -73,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
             Log.d("mostrar", "Sobrenome: " + pessoa.getSobrenome());
             Log.d("mostrar", "Nome: " + pessoa.getCursoDesejado());
             Log.d("mostrar", "Nome: " + pessoa.getTelefoneContato());
+
+            controller.salvar(pessoa);
         });
 
     }
