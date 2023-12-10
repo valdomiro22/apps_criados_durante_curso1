@@ -5,6 +5,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -29,12 +31,20 @@ public class MainActivity extends AppCompatActivity {
     Pessoa pessoa;
     PessoaController controller;
 
+    SharedPreferences preferences;
+
+    public static final String NOME_PREFERENCES = "pref_listaVip";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         iniciarComponentes();
+
+        preferences = getSharedPreferences(NOME_PREFERENCES, 0);
+        @SuppressLint("CommitPrefEdits")
+        SharedPreferences.Editor listaVip = preferences.edit();
 
         pessoa = new Pessoa();
         controller = new PessoaController();
@@ -78,9 +88,15 @@ public class MainActivity extends AppCompatActivity {
             Log.d("mostrar", "Nome: " + pessoa.getCursoDesejado());
             Log.d("mostrar", "Nome: " + pessoa.getTelefoneContato());
 
+            // Salvar no SharedPreferences
+            listaVip.putString("primeiroNome", pessoa.getPrimeiroNome());
+            listaVip.putString("sobrenome", pessoa.getSobrenome());
+            listaVip.putString("cursoDesejado", pessoa.getCursoDesejado());
+            listaVip.putString("telefoneContato", pessoa.getTelefoneContato());
+            listaVip.apply();
+
             controller.salvar(pessoa);
         });
-
     }
 
     private void iniciarComponentes() {
