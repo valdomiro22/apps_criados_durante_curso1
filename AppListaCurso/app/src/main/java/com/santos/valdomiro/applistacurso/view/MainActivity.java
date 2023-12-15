@@ -46,15 +46,29 @@ public class MainActivity extends AppCompatActivity {
         @SuppressLint("CommitPrefEdits")
         SharedPreferences.Editor listaVip = preferences.edit();
 
-        pessoa = new Pessoa();
+//        pessoa = new Pessoa();
         controller = new PessoaController();
+//
+//        pessoa.setPrimeiroNome("Valdomiro");
+//        pessoa.setSobrenome("Santos");
+//        pessoa.setCursoDesejado("Desenvolvimento Android");
+//        pessoa.setTelefoneContato("18-239282395");
 
-        pessoa.setPrimeiroNome("Valdomiro");
-        pessoa.setSobrenome("Santos");
-        pessoa.setCursoDesejado("Desenvolvimento Android");
-        pessoa.setTelefoneContato("18-239282395");
+//        editPrimeiroNome.setText(pessoa.getPrimeiroNome());
+//        editSobrenome.setText(pessoa.getSobrenome());
+//        editCursoDesejado.setText(pessoa.getCursoDesejado());
+//        editTelefoneContato.setText(pessoa.getTelefoneContato());
 
+        // Recuperando dados do sharedPreferences
+        // Recupera os dados e seta no objeto pessoa
+        pessoa = new Pessoa();
+        pessoa.setPrimeiroNome(preferences.getString("primeiroNome", "vazio"));
+        pessoa.setSobrenome(preferences.getString("sobrenome", "vazio"));
+        pessoa.setCursoDesejado(preferences.getString("cursoDesejado", "vazio"));
+        pessoa.setTelefoneContato(preferences.getString("telefoneContato", "vazio"));
 
+        // Após recuperar os dados, e setar no objeto pessoa
+        // Setar os valores nos editText. A partir do objeto pessoa
         editPrimeiroNome.setText(pessoa.getPrimeiroNome());
         editSobrenome.setText(pessoa.getSobrenome());
         editCursoDesejado.setText(pessoa.getCursoDesejado());
