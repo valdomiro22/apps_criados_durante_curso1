@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    AppCompatTextView txt_titulo;
+    AppCompatTextView txtTitulo;
     AppCompatEditText editPrimeiroNome;
     AppCompatEditText editSobrenome;
     AppCompatEditText editCursoDesejado;
@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
 //        editCursoDesejado.setText(pessoa.getCursoDesejado());
 //        editTelefoneContato.setText(pessoa.getTelefoneContato());
 
+
+
+
         // Recuperando dados do sharedPreferences
         // Recupera os dados e seta no objeto pessoa
         pessoa = new Pessoa();
@@ -74,11 +77,16 @@ public class MainActivity extends AppCompatActivity {
         editCursoDesejado.setText(pessoa.getCursoDesejado());
         editTelefoneContato.setText(pessoa.getTelefoneContato());
 
+
+
+
         btnLimpar.setOnClickListener(v -> {
             editPrimeiroNome.setText("");
             editSobrenome.setText("");
             editCursoDesejado.setText("");
             editTelefoneContato.setText("");
+
+
 
             Toast.makeText(getApplicationContext(), "Campos foram limpos",
                     Toast.LENGTH_SHORT).show();
@@ -114,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void iniciarComponentes() {
-        txt_titulo = findViewById(R.id.txt_titulo);
+        txtTitulo = findViewById(R.id.txt_titulo);
 
         editPrimeiroNome = findViewById(R.id.edit_primeiro_nome);
         editSobrenome = findViewById(R.id.edit_sobrenome);
