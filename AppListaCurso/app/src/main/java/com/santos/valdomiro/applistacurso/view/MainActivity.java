@@ -5,7 +5,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 
-import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     PessoaController controller;
 
     SharedPreferences preferences;
+    SharedPreferences.Editor listaVip;
 
     public static final String NOME_PREFERENCES = "pref_listaVip";
 
@@ -43,8 +43,7 @@ public class MainActivity extends AppCompatActivity {
         iniciarComponentes();
 
         preferences = getSharedPreferences(NOME_PREFERENCES, 0);
-        @SuppressLint("CommitPrefEdits")
-        SharedPreferences.Editor listaVip = preferences.edit();
+        listaVip = preferences.edit();
 
 //        pessoa = new Pessoa();
         controller = new PessoaController();
@@ -86,7 +85,9 @@ public class MainActivity extends AppCompatActivity {
             editCursoDesejado.setText("");
             editTelefoneContato.setText("");
 
-
+            // Limpar os dados do sharedPreferences
+            listaVip.clear();
+            listaVip.apply();
 
             Toast.makeText(getApplicationContext(), "Campos foram limpos",
                     Toast.LENGTH_SHORT).show();
