@@ -91,7 +91,7 @@
 
     <androidx.appcompat.widget.AppCompatButton android:id="@+id/btn_limpar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="120dp"
         android:text="@string/btn_limpar"
@@ -102,7 +102,7 @@
 
     <androidx.appcompat.widget.AppCompatButton android:id="@+id/btn_salvar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="120dp"
         android:layout_marginEnd="20dp"
         android:text="@string/btn_salvar"
@@ -113,7 +113,7 @@
 
     <androidx.appcompat.widget.AppCompatButton android:id="@+id/btn_finalizar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="240dp"
         android:layout_marginEnd="20dp"

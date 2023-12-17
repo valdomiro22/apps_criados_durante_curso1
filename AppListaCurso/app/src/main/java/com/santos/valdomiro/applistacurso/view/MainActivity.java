@@ -5,10 +5,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 
-import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.santos.valdomiro.applistacurso.R;
@@ -19,7 +16,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    AppCompatTextView txt_titulo;
+    AppCompatTextView txtTitulo;
     AppCompatEditText editPrimeiroNome;
     AppCompatEditText editSobrenome;
     AppCompatEditText editCursoDesejado;
@@ -31,10 +28,6 @@ public class MainActivity extends AppCompatActivity {
     Pessoa pessoa;
     PessoaController controller;
 
-    SharedPreferences preferences;
-
-    public static final String NOME_PREFERENCES = "pref_listaVip";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,19 +35,15 @@ public class MainActivity extends AppCompatActivity {
 
         iniciarComponentes();
 
-        preferences = getSharedPreferences(NOME_PREFERENCES, 0);
-        @SuppressLint("CommitPrefEdits")
-        SharedPreferences.Editor listaVip = preferences.edit();
+        controller = new PessoaController(MainActivity.this);
 
+        // Recuperando dados do sharedPreferences
+        // Recupera os dados e seta no objeto pessoa
         pessoa = new Pessoa();
-        controller = new PessoaController();
+        controller.buscar(pessoa);
 
-        pessoa.setPrimeiroNome("Valdomiro");
-        pessoa.setSobrenome("Santos");
-        pessoa.setCursoDesejado("Desenvolvimento Android");
-        pessoa.setTelefoneContato("18-239282395");
-
-
+        // Após recuperar os dados, e setar no objeto pessoa
+        // Setar os valores nos editText. A partir do objeto pessoa
         editPrimeiroNome.setText(pessoa.getPrimeiroNome());
         editSobrenome.setText(pessoa.getSobrenome());
         editCursoDesejado.setText(pessoa.getCursoDesejado());
@@ -65,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
             editSobrenome.setText("");
             editCursoDesejado.setText("");
             editTelefoneContato.setText("");
+
+            // Limpar os dados do sharedPreferences
+            controller.limpar();
 
             Toast.makeText(getApplicationContext(), "Campos foram limpos",
                     Toast.LENGTH_SHORT).show();
@@ -83,24 +75,15 @@ public class MainActivity extends AppCompatActivity {
             pessoa.setCursoDesejado(Objects.requireNonNull(editCursoDesejado.getText()).toString());
             pessoa.setTelefoneContato(Objects.requireNonNull(editTelefoneContato.getText()).toString());
 
-            Log.d("mostrar", "Nome: " + pessoa.getPrimeiroNome());
-            Log.d("mostrar", "Sobrenome: " + pessoa.getSobrenome());
-            Log.d("mostrar", "Nome: " + pessoa.getCursoDesejado());
-            Log.d("mostrar", "Nome: " + pessoa.getTelefoneContato());
+            Toast.makeText(getApplicationContext(), "Salvo", Toast.LENGTH_SHORT).show();
 
-            // Salvar no SharedPreferences
-            listaVip.putString("primeiroNome", pessoa.getPrimeiroNome());
-            listaVip.putString("sobrenome", pessoa.getSobrenome());
-            listaVip.putString("cursoDesejado", pessoa.getCursoDesejado());
-            listaVip.putString("telefoneContato", pessoa.getTelefoneContato());
-            listaVip.apply();
-
+            // Salvar os dados no sharedPreferences
             controller.salvar(pessoa);
         });
     }
 
     private void iniciarComponentes() {
-        txt_titulo = findViewById(R.id.txt_titulo);
+        txtTitulo = findViewById(R.id.txt_titulo);
 
         editPrimeiroNome = findViewById(R.id.edit_primeiro_nome);
         editSobrenome = findViewById(R.id.edit_sobrenome);
